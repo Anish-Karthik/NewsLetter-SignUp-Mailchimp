@@ -5,10 +5,10 @@ const https = require('https');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static('client/public'));
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/signup.html');
+    res.sendFile(__dirname + '/client/build/signup.html');
 });
 app.get('/failure', (req, res) => {
     res.redirect('/');
@@ -51,9 +51,9 @@ app.post('/', (req, res) => {
         var randomStatusCode = Math.ceil(Math.random()*2)*100;
         response.statusCode === 200 ? console.log('success') : console.log('failure');
         if (randomStatusCode === 200 || response.statusCode === 200) {
-            res.sendFile(__dirname + '/success.html');
+            res.sendFile(__dirname + '/client/build/success.html');
         } else {
-            res.sendFile(__dirname + '/failure.html');
+            res.sendFile(__dirname + '/client/build/failure.html');
         }
         //  whats is the use of response.on() ?
         // response.on() is used to listen to the response from the server
@@ -70,7 +70,7 @@ app.post('/', (req, res) => {
     request.end();
 });
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3000 || 5000, () => {
     console.log('Example app listening on port 3000!');
 });
 
