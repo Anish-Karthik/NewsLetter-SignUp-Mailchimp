@@ -42,15 +42,15 @@ app.post('/', (req, res) => {
     // required options 
     const options = {
         method: 'POST',
-        auth: "mohamed: f39e0300e57ff2fe1d315f4e5411bfc5-us21" // any string: api key
+        auth: "anish1: f39e0300e57ff2fe1d315f4e5411bfc5-us21" // any string: api key
     };
 
     // what is the use of request() ?
     // request() is used to send the data to the server
     const request = https.request(url, options, (response) => {
-        var randomStatusCode = Math.ceil(Math.random()*2)*100;
+        var randomStatusCode = Math.ceil(Math.random()*200)*100;
         response.statusCode === 200 ? console.log('success') : console.log('failure');
-        if (randomStatusCode === 200 || response.statusCode === 200) {
+        if (randomStatusCode !== 200 || response.statusCode === 200) {
             res.sendFile(__dirname + '/client/build/success.html');
         } else {
             res.sendFile(__dirname + '/client/build/failure.html');
@@ -70,10 +70,10 @@ app.post('/', (req, res) => {
     request.end();
 });
 
-app.listen(process.env.PORT || 3000 || 5000, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT || 3000 , () => {
     console.log('Example app listening on port 3000!');
 });
-
 
 
 
